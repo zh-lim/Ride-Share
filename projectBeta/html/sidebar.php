@@ -59,7 +59,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 		{
 			$error="Your Login Name or Password is invalid";
 		}
-	} else if (isset($_POST['usernameRegister']) && isset($_POST['passwordRegister']) && !isset($_POST['Edit'])){
+	} else if (isset($_POST['usernameRegister']) && isset($_POST['passwordRegister']) && !isset($_POST['Edit']) && !isset($_POST['edit-submit'])){
 		$username = pg_escape_string($_POST["usernameRegister"]);
 		$password = pg_escape_string($_POST["passwordRegister"]);
 		$firstname = pg_escape_string($_POST["firstname"]);
@@ -81,13 +81,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	}
 }
 if(isset($_SESSION['login_user'])){ 
+	if (isset($_POST["edit-submit"]) && isset($_SESSION["First name"])){
+		$_SESSION["First name"] = $_POST["firstname"];
+		$_SESSION["Last name"] = $_POST["lastname"];
+		$_SESSION["Email"] = $_POST["email"];
+		$_SESSION["contact"] = $_POST["contact"];
+		$_SESSION["licenseNumber"] = $_POST["licenseNum"];
+		$_SESSION["gender"] = $_POST["gender"];
+		$sql = "UPDATE account SET firstname='".$_SESSION["First name"]."', lastname='".$_SESSION["Last name"]."', email='".$_SESSION["Email"]."', contact='".$_SESSION["contact"]."', licensenum='".$_SESSION["licenseNumber"]."', gender='".$_SESSION["gender"]."'  WHERE username='".$_SESSION["login_user"]."';";
+		$result=pg_query($_SESSION['database'],$sql);
+	}
 	if (!isset($_SESSION["First name"])) {			
 		$sql = "SELECT * FROM account WHERE username='".$_SESSION["login_user"]."';";
 		$result=pg_query($_SESSION['database'],$sql);
 		$row=pg_fetch_array($result, null, MYSQLI_ASSOC);
 		$_SESSION["First name"] = $row["firstname"];
 		$_SESSION["Last name"] = $row["lastname"];
-		$_SESSION["Birthday"] = $row["birthday"];
 		$_SESSION["Email"] = $row["email"];
 		$_SESSION["contact"] = $row["contact"];
 		$_SESSION["licenseNumber"] = $row["licensenum"];
@@ -141,7 +150,7 @@ if(isset($_SESSION['login_user'])){
 					<?php }?>
 				</select>
 				<br/><br/>
-				<input type="submit" value=" Submit " style="float:left"/>
+				<input type="submit" name="edit-submit" value="Confirm" style="float:left"/>
 				<button name="Edit" type="button" onclick="switchToProf();"  style="float:left; width:50px;margin-left: 10px"> Cancel </button>
 				<br/>
 			</form>
