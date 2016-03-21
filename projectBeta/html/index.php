@@ -2,35 +2,15 @@
 	include("header.php");
 	
 ?>
-
+<title>Car Pooling</title>
 <body>
 <div id="layout">
-  <div id="header">
-    <h1 id="logo"><a href="http://all-free-download.com/free-website-templates/">SimpleEvent</a></h1>
-    <span id="slogan">Your slogan goes here</span>
-    <hr class="noscreen" />
-    <p class="noscreen noprint"> <em>Rychlá navigace: <a href="http://all-free-download.com/free-website-templates/">obsah</a>, <a href="http://all-free-download.com/free-website-templates/">navigace</a>.</em></p>
-    <div id="quicknav"> <a href="http://all-free-download.com/free-website-templates/">Home</a> <a href="http://all-free-download.com/free-website-templates/">Contact</a> <a href="http://all-free-download.com/free-website-templates/">Sitemap</a> </div>
-    <div id="search">
-      <form href="http://all-free-download.com/free-website-templates/" method="post">
-        <fieldset>
-        <input type="text" id="phrase" name="phrase" value="search phrase" onfocus="if(this.value=='search phrase')this.value=''" />
-        <input type="submit" id="submit" value="SEARCH" />
-        </fieldset>
-      </form>
-    </div>
-  </div>
-  <hr class="noscreen" />
-  <div id="nav" class="box">
-    <ul>
-      <li id="active"><a href="index.php">Home</a></li>
-      <li><a href="driver.php">I am a Driver</a></li>
-      <li><a href="passenger.php">I am a Passenger</a></li>
-      <!--li><a href="http://all-free-download.com/free-website-templates/">Portfolio</a></li>
-      <li><a href="http://all-free-download.com/free-website-templates/" class="nosep">Contacts</a></li>-->
-    </ul>
-    <hr class="noscreen" />
-  </div>
+<?php 
+	$active0 = "id='active'";
+	$pageTitle = "Car Pooling";
+	include("banner.php");
+	include("navigation.php");
+?>
   <div id="container" class="box">
     <div id="obsah" class="content box">
       <div class="in">
