@@ -1,96 +1,78 @@
-﻿<?php
-	include("header.php");
-	
+﻿
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>RideShare! Car pooling made simple!</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../html/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../html/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="cover.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../html/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  
+<body>
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <?php
+include("header.php");  
 ?>
 
-<body>
-<div id="layout">
-  <div id="header">
-    <h1 id="logo"><a href="http://all-free-download.com/free-website-templates/">SimpleEvent</a></h1>
-    <span id="slogan">Your slogan goes here</span>
-    <hr class="noscreen" />
-    <p class="noscreen noprint"> <em>Rychlá navigace: <a href="http://all-free-download.com/free-website-templates/">obsah</a>, <a href="http://all-free-download.com/free-website-templates/">navigace</a>.</em></p>
-    <div id="quicknav"> <a href="http://all-free-download.com/free-website-templates/">Home</a> <a href="http://all-free-download.com/free-website-templates/">Contact</a> <a href="http://all-free-download.com/free-website-templates/">Sitemap</a> </div>
-    <div id="search">
-      <form href="http://all-free-download.com/free-website-templates/" method="post">
-        <fieldset>
-        <input type="text" id="phrase" name="phrase" value="search phrase" onfocus="if(this.value=='search phrase')this.value=''" />
-        <input type="submit" id="submit" value="SEARCH" />
-        </fieldset>
-      </form>
-    </div>
-  </div>
-  <hr class="noscreen" />
-  <div id="nav" class="box">
-    <ul>
-      <li id="active"><a href="index.php">Home</a></li>
-      <li><a href="driver.php">I am a Driver</a></li>
-      <li><a href="passenger.php">I am a Passenger</a></li>
-      <!--li><a href="http://all-free-download.com/free-website-templates/">Portfolio</a></li>
-      <li><a href="http://all-free-download.com/free-website-templates/" class="nosep">Contacts</a></li>-->
-    </ul>
-    <hr class="noscreen" />
-  </div>
-  <div id="container" class="box">
-    <div id="obsah" class="content box">
-      <div class="in">
-        <div id="new-article">
-          <div id="corner">
-            <h2><a href="http://all-free-download.com/free-website-templates/">Lorem ipsum</a></h2>
-            <div class="f-left article-img"><img src="tmp/image.jpg" alt="" />
-              <div></div>
+
+          <div class="inner cover">
+          <img src="../html/img/ridesharesplash.png">
+            <h1 class="cover-heading">Going Somewhere?</h1>
+            <p class="lead"> Search. Pay. Go. Ride sharing made simple!</p>
+            <p class="lead">
+              <a href="register.php" class="btn btn-lg btn-default">Register</a>
+               <a href="signin.php" class="btn btn-lg btn-default">Login</a>
+            </p>
+          </div>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
             </div>
-            <p class="f-left"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. <a href="http://all-free-download.com/free-website-templates/" class="more">MORE</a></p>
-            <div class="clear"></div>
           </div>
+
         </div>
-        <div class="article">
-          <h2><a href="http://all-free-download.com/free-website-templates/">Lorem ipsum</a></h2>
-          <div class="f-left article-img"><img src="tmp/image.jpg" alt="" />
-            <div></div>
-          </div>
-          <p class="f-left"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. <a href="http://all-free-download.com/free-website-templates/" class="more">MORE</a></p>
-          <div class="clear"></div>
-        </div>
-        <div class="article">
-          <h2><a href="http://all-free-download.com/free-website-templates/">Lorem ipsum</a></h2>
-          <div class="f-left article-img"><img src="tmp/image.jpg" alt="" />
-            <div></div>
-          </div>
-          <p class="f-left"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. <a href="http://all-free-download.com/free-website-templates/" class="more">MORE</a></p>
-          <div class="clear"></div>
-        </div>
-        <div class="article">
-          <h2><a href="http://all-free-download.com/free-website-templates/">Lorem ipsum</a></h2>
-          <div class="f-left article-img"><img src="tmp/image.jpg" alt="" />
-            <div></div>
-          </div>
-          <p class="f-left"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. <a href="http://all-free-download.com/free-website-templates/" class="more">MORE</a></p>
-          <div class="clear"></div>
-        </div>
-        <div class="article">
-          <h2><a href="http://all-free-download.com/free-website-templates/">Lorem ipsum</a></h2>
-          <div class="f-left article-img"><img src="tmp/image.jpg" alt="" />
-            <div></div>
-          </div>
-          <p class="f-left"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. <a href="http://all-free-download.com/free-website-templates/" class="more">MORE</a></p>
-          <div class="clear"></div>
-        </div>
-        <a href="http://all-free-download.com/free-website-templates/" class="older">&laquo; Older articles</a> </div>
+
+      </div>
+
     </div>
-    <div id="panel-right" class="box panel">
-		<div id="bottom">
-			<?php include("sidebar.php")?>
-		</div>
-    </div>
-  </div>
-</div>
-<div id="footer">
-  <div id="foot">
-    <div id="page-bottom"> <a href="#header">Go up</a> </div>
-    <p class="f-left">&copy; 2008 - <a href="http://all-free-download.com/free-website-templates/">SimpleEvent</a></p>
-    <p class="f-right"><a href="http://www.tvorimestranky.cz" id="webdesign">Webdesign</a>: <a href="http://www.tvorimestranky.cz">TvorimeStranky.cz</a> | Sponsored by: <a href="http://www.topas-tachlovice.cz/topas-tachlovice.aspx">Tachlovice</a></p>
-  </div>
-</div>
-<div align=center>This template  downloaded form <a href='http://all-free-download.com/free-website-templates/'>free website templates</a></div></body>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../html/dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../html/assets/js/ie10-viewport-bug-workaround.js"></script>
+ </body>
 </html>
