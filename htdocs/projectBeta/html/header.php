@@ -7,8 +7,7 @@
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="../../favicon.ico">
-
+  <link rel="icon" href="favicon.ico">
   <title>RideShare! Car pooling made simple!</title>
 
   <!-- Bootstrap core CSS -->
@@ -38,9 +37,9 @@
           <h3 class="masthead-brand">RideShare</h3>
           <nav>
             <ul class="nav masthead-nav">
-              <li class="active"><a href="../html/index.php">Home</a></li>
-              <li><a href="../html/passenger.php">Ride</a></li>
-              <li><a href="../html/driver.php">Drive</a></li>
+              <li class="active"><a href="index.php">Home</a></li>
+              <li><a href="passenger.php">Ride</a></li>
+              <li><a href="driver.php">Drive</a></li>
             </ul>
           </nav>
         </div>
@@ -64,6 +63,7 @@
     <?php
     
     include("config.php");
+    include("functions.php");
     session_start();
     ?>
 

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	include("header.php");
 	
 ?>
@@ -7,7 +7,7 @@
 		alert("Hello! I am an alert box!! "+username);
 		$('#'+username).val("Decline");
 	}
-</script>
+</script>	
 <title>Ride Offer History</title>
 <body>
 <div id="layout">
@@ -22,6 +22,7 @@
 	<h3>Ride's Details</h3>
 <?php
 	$displayButton;
+	$PaymentButton;
 	$startTimeClicked = $_SESSION['start_time_clicked'];
 	$dateClicked = $_SESSION['date_clicked'];
 	if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['chooseRide'])){
@@ -109,7 +110,7 @@
       echo "<td>" . $row[9] . "</td>";
       echo "<td>";
 	$rideStatus = $row[10];
-	if ($rideStatus == 'E') {
+    if ($rideStatus == 'E') {
 		echo "Expired";
 		$displayButton = "disabled";
 		$displayButton2 = "disabled";
@@ -121,16 +122,24 @@
 		$setRideStatus = "Confirm";
 	}else if ($rideStatus == 'C') {
 		echo "Confirmed";
+		echo "$paymentStatus";
 		$displayButton = "disabled";
 		$displayButton2 = "";
 		$setRideStatus = "Reopen";
-	}else {
+		echo "</td><td><form action='transaction.php' method='POST'>Driver name<input type='text' name='content[]' value='".$_SESSION["login_user"]."'>Starting time<input type='text' name='content[]' value='".$startTimeClicked."'>Date<input type ='text' name='content[]' value='".$dateClicked."'><input type = 'submit' name='doesitmatter' value = 'Get Paid!'/></form></td></tr>";
+	} 
+	else {
 		echo "Finished";
 		$displayButton = "disabled";
 		$displayButton2 = "disabled";
 		$setRideStatus = "Closed";
 	}
+
+
+      
       echo "</td><td><form action='rideDetails.php' method='POST'><input type = 'submit' name='confirmRide' value = '".$setRideStatus."' $displayButton2/></form></td></tr>";
+      
+      
     echo "</table>";
     
     pg_free_result($result);

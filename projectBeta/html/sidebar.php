@@ -156,7 +156,7 @@ if(isset($_SESSION['login_user'])){
 				<label>Password :</label>
 				<input type="password" name="password"/><br/>
 				<br/>
-				<input type="submit" value=" Submit "/>
+				<input type="Login" value=" Submit "/>
 				<a onclick="switchToRegister();" style="float:right">Register -></a>
 				<?php 
 					if ($isRegisterSuccessful == true) {				
@@ -188,8 +188,8 @@ if(isset($_SESSION['login_user'])){
 					<option value="M">M</option>
 				</select>
 				<br/><br/>
-				<input type="submit" value=" Submit "/>
-				<a onclick="switchToLogin();" style="float:right">Login -></a>
+				<input type="Register" value=" Submit "/>
+				<a onclick="switchToLogin();" style="float:right">Go back -></a>
 			</form>
 	
 <?php	} ?> 	

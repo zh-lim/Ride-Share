@@ -1,0 +1,4 @@
+insert into ride values ('14:00','2016-03-30','xiexin2011','SLB2860T','4','5','Clementi','117417','13 Computing Drive','Clementi','129588','3155 Commonwealth Avenue West','P');
+insert into ride values ('18:00','2016-03-30','xiexin2011','SLB2860T','4','5','Clementi','129588','3155 Commonwealth Avenue West','Clementi','117417','13 Computing Drive','P');
+insert into ride values ('17:00','2016-03-29','anniechapman1991','SLB2886U','4','10','Bishan','579837','9 Bishan Place','Clementi','117575','9 Engineering Drive 1','P');
+insert into ride values ('07:00','2016-03-28','anniechapman1991','SLB2886U','4','10','Clementi','119275','12 Kent Ridge Crescent','Changi','819663','65 Airport Boulevard','P');
