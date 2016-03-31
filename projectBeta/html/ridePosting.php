@@ -15,26 +15,56 @@
 ?>
   <div id="container" class="box">
 <div id="obsah" class="content box">
+
 <?php 
 	
 
 	$query = "SELECT * FROM car c WHERE c.owner = '".$_SESSION["login_user"]."';";
 	$result=pg_query($query) or die('Query failed: ' . pg_last_error());
 	$display = "block";
+	if ($_POST["carChoice"] <> "") $_SESSION["regNum"] = $_POST["carChoice"];
 	if(pg_num_rows($result)==0) {
 		echo "<h3>You Have Not Registered A Car! Register Your Car Before Posting A Ride</h3>";
 		echo "<a href=\"carReg.php\">Register Car</a>";
 		$display = none;
+	} else if($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION["regNum"] == "") {
+		echo "<h3>Please Select A Car Before Posting Your Offer</h3>";
+		echo "<a href=\"http://localhost/ridePosting.php\">Back</a>";
+		$display = none;
+	} else {
+?>
+	<lable>Choose your car: </label>
+	<form action = "ridePosting.php" method = "POST">
+		<select id = "carChoice" name = "carChoice" onchange = "this.form.submit();">
+			<option value = <?php echo $_POST["carChoice"]; ?>><?php
+				if ($_SESSION["regNum"] == "") echo "Select Your Car";
+				else echo $_SESSION["regNum"];
+			?></option>
+			<?php
+        		$query = "SELECT regnum FROM car WHERE owner = '".$_SESSION["login_user"]."';";
+		        $result = pg_query($query) or die('Query failed: ' . pg_last_error());
+         
+		        while($line = pg_fetch_array($result, null, PGSQL_ASSOC)){
+           			foreach ($line as $col_value) {
+					if ($col_value <> $_SESSION["regNum"]) echo "<option value=\"".$col_value."\">".$col_value."</option><br>";
+         			}
+        		}
+        		pg_free_result($result);
+        		?>
+		</select>
+	</form>
+	<br/>
+<?php
 	}
-	$query2 = "SELECT numseat FROM car c WHERE c.owner = '".$_SESSION["login_user"]."';";
+	$query2 = "SELECT numseat FROM car c WHERE c.owner = '".$_SESSION["login_user"]."' AND c.regnum = '".$_SESSION["regNum"]."';";
 	$result2 = pg_query($query2) or die('Query failed: ' . pg_last_error());
 	$value = pg_fetch_object($result2);
 	$numSeat = $value->numseat;
 	
-	if ($_SERVER["REQUEST_METHOD"] == "POST")
-		$_SESSION["regNum"] = $_POST["carChoice"];
-	if($_SERVER["REQUEST_METHOD"] == "POST"){
-		$sql = "INSERT INTO ride VALUES ('" .$_POST['startTime']. "','" .$_POST['startDate']. "','" .$_SESSION['login_user']. "','" .$regnum. "'," .$_POST['availSeats']. "," .$_POST['cost']. ",'" .$_POST['sNhood']. "','" .$_POST['sPostCode']. "','" .$_POST['sAddress']. "','" .$_POST['dNhood']. "','" .$_POST['dPostCode']. "','" .$_POST['dAddress']. "','P');";
+	
+	if($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION["regNum"] <> ""){
+		if (isset($_POST['startTime']) && isset($_POST['startDate']) && isset($_POST['availSeats']) && isset($_POST['sPostCode']) && isset($_POST['dPostCode'])) {
+		$sql = "INSERT INTO ride VALUES ('" .$_POST['startTime']. "','" .$_POST['startDate']. "','" .$_SESSION['login_user']. "','" .$_SESSION['regNum']. "'," .$_POST['availSeats']. "," .$_POST['cost']. ",'" .$_POST['sNhood']. "','" .$_POST['sPostCode']. "','" .$_POST['sAddress']. "','" .$_POST['dNhood']. "','" .$_POST['dPostCode']. "','" .$_POST['dAddress']. "','P');";
 		$result3 = pg_query($sql);
 		
 		if ($result3 != false) {
@@ -49,6 +79,7 @@
 		}
 		$display = none;
 		echo "<a href=\"http://localhost/ridePosting.php\">Post Another Ride Offer</a>";
+		}
 	}
 
 	echo "<form id='post-form' action='ridePosting.php' method='post' style='display:".$display."'>";
@@ -108,24 +139,6 @@
 		}
 	}	
 </script>
-	<lable>Choose your car: </label>
-	<form action = "ridePosting.php" method = "POST">
-		<select id = "carChoice" name = "carChoice" onchange="this.form.submit()">
-			<option value = "">Select Your Car</option>
-			<?php
-        		$query = "SELECT regnum FROM car WHERE owner = '".$_SESSION["login_user"]."';";
-		        $result = pg_query($query) or die('Query failed: ' . pg_last_error());
-         
-		        while($line = pg_fetch_array($result, null, PGSQL_ASSOC)){
-           			foreach ($line as $col_value) {
-					echo "<option value=\"".$col_value."\">".$col_value."</option><br>";
-         			}
-        		}
-        		pg_free_result($result);
-        		?>
-		</select>
-	</form>
-	<br/>
 	<label>Start Time :</label>
 	<input type="time" id="startTime" name="startTime" onchange="getStartDateTime();" required/><br/>
 	<label>Date :</label>
