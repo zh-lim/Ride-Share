@@ -30,8 +30,10 @@ $isRegisterSuccessful = false;
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
+	
+
+	// username and password sent from Form
 	$_SESSION['database'] = $db;
-	/**************************************** Login ******************************************************************/
 	if (isset($_POST["username"]) && isset($_POST["password"])) {
 		$myusername=pg_escape_string($db,$_POST["username"]); 
 		$mypassword=pg_escape_string($db,$_POST["password"]); 
@@ -46,18 +48,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 			$_SESSION['login_user']=$myusername;
 			$_SESSION['password']= $mypassword;
 			echo "<h3 id = 'logInMsg'>Logged In Successfully!</h3>";
-			if ($_SESSION['login_user'] == "admin") {
-				header("Location: indexAdmin.php");
-			}
 		}
 		else 
 		{
 			$error="User name does not exist or password is incorrect!";
 			echo "<h3 id = 'logInMsg'>" .$error . "</h3>";
 		}
-/**************************************** Login end ******************************************************************/
 		
-/**************************************** Registration ******************************************************************/
 	} else if (isset($_POST['usernameRegister']) && isset($_POST['passwordRegister']) && !isset($_POST['Edit']) && !isset($_POST['edit-submit'])){
 		$username = pg_escape_string($_POST["usernameRegister"]);
 		$password = pg_escape_string($_POST["passwordRegister"]);
@@ -76,9 +73,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 			$isRegisterSuccessful = true;
 		}
 	}
-/**************************************** Registration End ******************************************************************/
 }
-/**************************************** Edit Profile ******************************************************************/
 if(isset($_SESSION['login_user'])){ 
 	if (isset($_POST["edit-submit"]) && isset($_SESSION["First name"])){
 		$_SESSION["First name"] = $_POST["firstname"];
@@ -90,8 +85,6 @@ if(isset($_SESSION['login_user'])){
 		$sql = "UPDATE account SET firstname='".$_SESSION["First name"]."', lastname='".$_SESSION["Last name"]."', email='".$_SESSION["Email"]."', contact='".$_SESSION["contact"]."', licensenum='".$_SESSION["licenseNumber"]."', gender='".$_SESSION["gender"]."'  WHERE username='".$_SESSION["login_user"]."';";
 		$result=pg_query($_SESSION['database'],$sql);
 	}
-	
-/**************************************** Edit Profile End ******************************************************************/
 	if (!isset($_SESSION["First name"])) {		
 		$sql = "SELECT * FROM account WHERE username='".$_SESSION["login_user"]."';";
 		$result=pg_query($_SESSION['database'],$sql);
@@ -107,7 +100,7 @@ if(isset($_SESSION['login_user'])){
 	}
 ?>
 			
-			<div id="profile" style="display:block">
+			<div id="profile" style="display="block">
 				<h4 align="center" style="margin:0px">Welcome  <?php echo $_SESSION["login_user"]; ?></h4>
 				<h3 align="center" style="margin:0px;font-size: 100%">Your Profile</h3>
 				<p><B>First Name: </B><?php echo $_SESSION["First name"];?></p>
@@ -163,7 +156,7 @@ if(isset($_SESSION['login_user'])){
 				<label>Password :</label>
 				<input type="password" name="password"/><br/>
 				<br/>
-				<input type="submit" value=" Login "/>
+				<input type="Login" value=" Submit "/>
 				<a onclick="switchToRegister();" style="float:right">Register -></a>
 				<?php 
 					if ($isRegisterSuccessful == true) {				
@@ -195,7 +188,7 @@ if(isset($_SESSION['login_user'])){
 					<option value="M">M</option>
 				</select>
 				<br/><br/>
-				<input type="submit" value=" Register "/>
+				<input type="Register" value=" Submit "/>
 				<a onclick="switchToLogin();" style="float:right">Go back -></a>
 			</form>
 	

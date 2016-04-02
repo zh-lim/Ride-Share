@@ -42,10 +42,32 @@
 									<label class="col-md-4 control-label" for="pickUp">Pick up Neighbourhood</label>  
 									<div class="col-md-4">
 										<select id="pickUpNH" name="pickUpNH" class="form-control input-md">
-											<option value="AMK">Ang Mo Kio</option>
-											<option value="Clementi">Clementi</option>
-											<option value="Seng Kang">Seng Kang</option>
-											<option value="Yishun">Yishun</option>
+											<option value = "">Select A Neighbourhood</option>
+											<option value = "Ang Mo Kio">Ang Mo Kio</option>
+											<option value = "Bedok">Bedok</option>
+											<option value = "Bishan">Bishan</option>
+											<option value = "Bukit Batok">Bukit Batok</option>
+											<option value = "Bukit Merah">Bukit Merah</option>
+											<option value = "Bukit Panjang">Bukit Panjang</option>
+											<option value = "Choa Chu Kang">Choa Chu Kang</option>
+											<option value = "Clementi">Clementi</option>
+											<option value = "Geylang">Geylang</option>
+											<option value = "Hougang">Hougang</option>
+											<option value = "Jurong East">Jurong East</option>
+											<option value = "Jurong West">Jurong West</option>
+											<option value = "Kallang/Whampoa">Kallang/Whampoa</option>
+											<option value = "Pasir Ris">Pasir Ris</option>
+											<option value = "Punggol">Punggol</option>
+											<option value = "Queenstown">Queenstown</option>
+											<option value = "Sembawang">Sembawang</option>
+											<option value = "Serangoon">Serangoon</option>
+											<option value = "Sengkang">Sengkang</option>
+											<option value = "Simei">Simei</option>
+											<option value = "Tampines">Tampines</option>
+											<option value = "Tampines North">Tampines North</option>
+											<option value = "Toa Payoh">Toa Payoh</option>
+											<option value = "Woodlands">Woodlands</option>
+											<option value = "Yishun">Yishun</option>
 										</select>
 									</div>
 								</div>
@@ -70,10 +92,32 @@
 				  					<label class="col-md-4 control-label" for="DestinationNH">Destination Neighbourhood</label>  
 									<div class="col-md-4">
 										<select id="DestinationNH" name="DestinationNH" class="form-control input-md">
-											<option value="AMK">Ang Mo Kio</option>
-											<option value="Clementi">Clementi</option>
-											<option value="Seng Kang">Seng Kang</option>
-											<option value="Yishun">Yishun</option>
+											<option value = "">Select A Neighbourhood</option>
+											<option value = "Ang Mo Kio">Ang Mo Kio</option>
+											<option value = "Bedok">Bedok</option>
+											<option value = "Bishan">Bishan</option>
+											<option value = "Bukit Batok">Bukit Batok</option>
+											<option value = "Bukit Merah">Bukit Merah</option>
+											<option value = "Bukit Panjang">Bukit Panjang</option>
+											<option value = "Choa Chu Kang">Choa Chu Kang</option>
+											<option value = "Clementi">Clementi</option>
+											<option value = "Geylang">Geylang</option>
+											<option value = "Hougang">Hougang</option>
+											<option value = "Jurong East">Jurong East</option>
+											<option value = "Jurong West">Jurong West</option>
+											<option value = "Kallang/Whampoa">Kallang/Whampoa</option>
+											<option value = "Pasir Ris">Pasir Ris</option>
+											<option value = "Punggol">Punggol</option>
+											<option value = "Queenstown">Queenstown</option>
+											<option value = "Sembawang">Sembawang</option>
+											<option value = "Serangoon">Serangoon</option>
+											<option value = "Sengkang">Sengkang</option>
+											<option value = "Simei">Simei</option>
+											<option value = "Tampines">Tampines</option>
+											<option value = "Tampines North">Tampines North</option>
+											<option value = "Toa Payoh">Toa Payoh</option>
+											<option value = "Woodlands">Woodlands</option>
+											<option value = "Yishun">Yishun</option>
 										</select>
 									</div>
 								</div>								

@@ -11,5 +11,5 @@ if (mysqli_connect_errno())
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
 */
-$db = pg_connect("host=localhost port=5432 dbname=postgres user=postgres password=01dec1991") or die("Could not connect:sbsbsb".pg_last_error());
+$db = pg_connect("host=localhost port=5432 dbname=postgres user=postgres password=26515307") or die("Could not connect:sbsbsb".pg_last_error());
 ?>
