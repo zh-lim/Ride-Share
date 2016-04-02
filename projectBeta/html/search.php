@@ -1,30 +1,21 @@
 <?php
 	include("header.php");	
 ?>
-
+<title> Search </title>
 <body>
 	<div id="layout">
-		<div id="header">
-		    <h1 id="logo"><a href="http://all-free-download.com/free-website-templates/">SimpleEvent</a></h1>
-		    <span id="slogan">Your slogan goes here</span>
-		    <hr class="noscreen" />
-		    <p class="noscreen noprint"> <em>Rychlá navigace: <a href="http://all-free-download.com/free-website-templates/">obsah</a>, <a href="http://all-free-download.com/free-website-templates/">navigace</a>.</em></p>
-		    <div id="quicknav"> <a href="http://all-free-download.com/free-website-templates/">Home</a> <a href="http://all-free-download.com/free-website-templates/">Contact</a> <a href="http://all-free-download.com/free-website-templates/">Sitemap</a> </div>
-		    <hr class="noscreen" />
-		    <div id="nav" class="box">
-			    <ul>
-			      <li id="active"><a href="index.php">Home</a></li>
-			      <li><a href="driver.php">I am a Driver</a></li>
-			      <li><a href="passenger.php">I am a Passenger</a></li>
-			      <li><a href="search.php">Search</a></li>
-			  	</ul>
-			  	<hr class="noscreen" />
-			</div>
+		<!-- <div id="header"> -->
+		    <?php 
+				$active5 = "id='active'";
+				$pageTitle = "Search";
+				include("banner.php");
+				include("navigation.php");
+			?>
 
 			<div id="container" class="box">
 			    <div id="obsah" class="content box">
 					<div class="in">
-						<form class="form-horizontal" action="driver-submitted.php" method="post">
+						<form class="form-horizontal" action="#" method="post">
 							<fieldset>
 								<!-- Form Name -->
 								<legend>Search for your ride</legend>
@@ -129,17 +120,14 @@
 									</div>
 								</div>
 
-								<input type="submit" name="search" value="Search"/>
+								<input type="submit" name="Search" value="Search"/>
 							</fieldset>
 						</form>
 
 					</div>
-			    
-
-
-
 			
-			<?php if(isset($_GET['formSubmit'])){
+			<?php if($_POST['pickUpNH']||$_POST['pickUpP']||$_POST['DestinationNH']||$_POST['DestinationP']){
+
 				// $pickup = $_POST['pickUp'];
 				$pickupnh = $_POST['pickUpNH'];
 				$pickupp = $_POST['pickUpP'];
@@ -152,13 +140,59 @@
 				$dpostal1 = intval($destp) - 10;
 				$dpostal2 = intval($destp) + 10;
 
-				$query = "SELECT * FROM ride WHERE sNHood = '".$pickupnh."' OR sPostal BETWEEN '".$spostal1."' AND '".$spostal2."' OR dNHood = '".$destnh."' OR dPostal BETWEEN '".$dpostal1."' AND '".$dpostal2."'";
-				$result = pg_query($query);
+				$query = "SELECT * FROM ride WHERE snhood = '".$pickupnh."' AND spostal BETWEEN '".$spostal1."' AND '".$spostal2."' AND dnhood = '".$destnh."' AND dpostal BETWEEN '".$dpostal1."' AND '".$dpostal2."'";
+				$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 				// if($pickup == ""){
-
+				echo "<b>SQL:   </b>".$query."<br><br>";
 				// 	$query = "SELECT * FROM ride WHERE ";
 				// 	$result=pg_query($sql);
 				// }
+				echo "<table border=\"1\" >
+				<col width=\"5%\">
+				<col width=\"7%\">
+				<col width=\"9%\">
+				<col width=\"5%\">
+				<col width=\"7%\">
+				<col width=\"14%\">
+				<col width=\"8%\">
+				<col width=\"8%\">
+				<col width=\"14%\">
+				<col width=\"8%\">
+				<col width=\"8%\">
+				<col width=\"7%\">
+				<tr>
+				<th>Details</th><br>
+				<th>Starting Time</th>
+				<th>Date</th>
+				<th>Driver</th>
+				<th>Vehicle</th>
+				<th>Seats</th>
+				<th>Cost</th>
+				<th>Pick up</th>
+				<th></th>
+				<th></th>
+				<th>Destination</th>
+				<th></th>
+				<th></th>
+				<th>Status</th>
+				</tr>";
+
+				$row = pg_fetch_row($result);
+				echo $row;
+			    echo "<tr>";
+			    echo "<td>" . $row[0] . "</td>";
+			    echo "<td>" . $row[1] . "</td>";
+			    echo "<td>" . $row[2] . "</td>";
+			    echo "<td>" . $row[3] . "</td>";
+			    echo "<td>" . $row[4] . "</td>";
+			    echo "<td>" . $row[5] . "</td>";
+			    echo "<td>" . $row[6] . "</td>";
+			    echo "<td>" . $row[7] . "</td>";
+			    echo "<td>" . $row[8] . "</td>";
+			    echo "<td>" . $row[9] . "</td>";
+			    echo "<td>";
+
+			      pg_free_result($result);
 			}
 			?>
 					</div>
@@ -166,7 +200,7 @@
 		<div id="bottom">
 			<?php include("sidebar.php")?>
 		</div>
-    </div>
+    // </div>
   </div>
 </div>
 <div id="footer">
