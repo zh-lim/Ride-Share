@@ -15,6 +15,10 @@
 	<div style="text-align:left;">
 		<table style="text-align:left;">
 <?php
+	if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["recordDelete"])){
+		$sql = "DELETE FROM account WHERE username = '".$_POST["recordDelete"]."';" ;
+		$result = pg_query($sql) or die('Query failed: ' . pg_last_error());
+	}
 	$query = "SELECT * FROM account a ORDER BY a.username;";
 	$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 	$count = 1;
@@ -43,6 +47,7 @@
 		<td><?php echo $row[8]; ?></td>
 		<th style="text-align:left;">Balance: </th>
 		<td><?php echo $row[7]; ?></td>
+		<td><form action="accountsTable.php" method="post"><button name = "recordDelete" id = "recordDelete" value = <?php echo "'".$row[0]."'"; ?>>Delete</buton></form></td>
 		</tr>
 
 		<tr>
