@@ -30,7 +30,7 @@
 		<td><?php echo $row[1]; ?></td>
 		<th style="text-align:left;">Last Name: </th>
 		<td><?php echo $row[2]; ?></td>
-		<td><button>Edit</buton></td>
+		<td><form action="recordEdit.php" method="post"><button name = "recordEdit" id = "recordEdit" value = <?php echo "'".$row[0]."'"; ?>>Edit</buton></form></td>
 		</tr>		
 
 		<tr>
