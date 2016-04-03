@@ -125,29 +125,59 @@
 						</form>
 
 					</div>
-			
-			<?php if($_POST['pickUpNH']||$_POST['pickUpP']||$_POST['DestinationNH']||$_POST['DestinationP']){
+					<div id="panel-right" class="box panel">
+						<div id="bottom">
+							<?php include("sidebar.php");?>
+						</div>
+				
+					</div>
+				<?php 
+				$query = "SELECT * FROM ride WHERE ";
+				if($_POST['pickUpNH']){
+					$pickupnh = $_POST['pickUpNH'];
+					$query .= "snhood ='".$pickupnh."' AND ";
+				}
+				if($_POST['pickUpP']){
+					$pickupp = $_POST['pickUpP'];
+					$spostal1 = intval($pickupp) - 30;
+					$spostal2 = intval($pickupp) + 30;
+					$query .= "spostal BETWEEN '".$spostal1."' AND '".$spostal2."' AND ";
+				}
+				if($_POST['DestinationNH']){
+					$destnh = $_POST['DestinationNH'];
+					$query .= "dnhood = '".$destnh."' AND ";
+				}
+				if($_POST['DestinationP']){
+					$destp = $_POST['DestinationP'];
+					$dpostal1 = intval($destp) - 30;
+					$dpostal2 = intval($destp) + 30;
+					$query .= "dpostal BETWEEN '".$dpostal1."' AND '".$dpostal2."' AND ";
+				}
 
-				// $pickup = $_POST['pickUp'];
-				$pickupnh = $_POST['pickUpNH'];
-				$pickupp = $_POST['pickUpP'];
-				// $dest = $_POST['Destination'];
-				$destnh = $_POST['DestinationNH'];
-				$destp = $_POST['DestinationP']; 
+				$query = substr($query, 0, -5);
 
-				$spostal1 = intval($pickupp) - 10;
-				$spostal2 = intval($pickupp) + 10;
-				$dpostal1 = intval($destp) - 10;
-				$dpostal2 = intval($destp) + 10;
+				// if($_POST['pickUpNH']||$_POST['pickUpP']||$_POST['DestinationNH']||$_POST['DestinationP']){
 
-				$query = "SELECT * FROM ride WHERE snhood = '".$pickupnh."' AND spostal BETWEEN '".$spostal1."' AND '".$spostal2."' AND dnhood = '".$destnh."' AND dpostal BETWEEN '".$dpostal1."' AND '".$dpostal2."'";
+				// // $pickup = $_POST['pickUp'];
+				// $pickupnh = $_POST['pickUpNH'];
+				// $pickupp = $_POST['pickUpP'];
+				// // $dest = $_POST['Destination'];
+				// $destnh = $_POST['DestinationNH'];
+				// $destp = $_POST['DestinationP']; 
+
+				// $spostal1 = intval($pickupp) - 10;
+				// $spostal2 = intval($pickupp) + 10;
+				// $dpostal1 = intval($destp) - 10;
+				// $dpostal2 = intval($destp) + 10;
+
+				// $query = "SELECT * FROM ride WHERE snhood = '".$pickupnh."' AND spostal BETWEEN '".$spostal1."' AND '".$spostal2."' AND dnhood = '".$destnh."' AND dpostal BETWEEN '".$dpostal1."' AND '".$dpostal2."'";
 				$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 				// if($pickup == ""){
 				echo "<b>SQL:   </b>".$query."<br><br>";
 				// 	$query = "SELECT * FROM ride WHERE ";
 				// 	$result=pg_query($sql);
 				// }
-				echo "<table border=\"1\" >
+				echo "<table border=\"1\" cellpadding=\"0\" cellspacing=\"0\" class=\"db-table\" >
 				<col width=\"5%\">
 				<col width=\"7%\">
 				<col width=\"9%\">
@@ -161,7 +191,6 @@
 				<col width=\"8%\">
 				<col width=\"7%\">
 				<tr>
-				<th>Details</th><br>
 				<th>Starting Time</th>
 				<th>Date</th>
 				<th>Driver</th>
@@ -169,16 +198,11 @@
 				<th>Seats</th>
 				<th>Cost</th>
 				<th>Pick up</th>
-				<th></th>
-				<th></th>
 				<th>Destination</th>
-				<th></th>
-				<th></th>
 				<th>Status</th>
 				</tr>";
 
 				$row = pg_fetch_row($result);
-				echo $row;
 			    echo "<tr>";
 			    echo "<td>" . $row[0] . "</td>";
 			    echo "<td>" . $row[1] . "</td>";
@@ -193,14 +217,10 @@
 			    echo "<td>";
 
 			      pg_free_result($result);
-			}
+			// }
 			?>
-					</div>
-					<div id="panel-right" class="box panel">
-		<div id="bottom">
-			<?php include("sidebar.php")?>
-		</div>
-    // </div>
+					
+		    </div><!-- end of obsah -->
   </div>
 </div>
 <div id="footer">
