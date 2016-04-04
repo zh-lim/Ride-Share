@@ -70,7 +70,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 		$contact = pg_escape_string($_POST["contact"]);
 		$gender = pg_escape_string($_POST["gender"]);
 		
-		$sql = "INSERT INTO account VALUES ('" .$_POST['usernameRegister']. "','" .$_POST['firstname']. "','" .$_POST['lastname']. "','" .$_POST['licenseNum']. "','" .$_POST['email']. "','" .$_POST['birthday']. "','" .$_POST['passwordRegister']. "', 0,'" .$_POST['contact']. "','" .$_POST['gender']. "');";
+		$sql = "INSERT INTO account VALUES ('" .$_POST['usernameRegister']. "','" .$_POST['firstname']. "','" .$_POST['lastname']. "','" .$_POST['licenseNum']. "','" .$_POST['email']. "','" .$_POST['birthday']. "','" .$_POST['passwordRegister']. "', 100,'" .$_POST['contact']. "','" .$_POST['gender']. "');";
 		$result=pg_query($sql);
 		if ($result != false) {
 			$isRegisterSuccessful = true;
