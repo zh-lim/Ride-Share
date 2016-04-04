@@ -3,15 +3,24 @@
 ?>
 <title> Search </title>
 <body>
+	<div class='profilebox'>
+		<?php
+		if($_SESSION["login_user"]){
+			echo "hello ".$_SESSION["login_user"];
+			echo "<br/><a href='logout.php'>Logout</a> | ";
+			echo "<a href='profile.php'>Profile</a>";
+		}
+	?>
+	</div>
 	<div id="layout">
 		<!-- <div id="header"> -->
 		    <?php 
 				$active5 = "id='active'";
 				$pageTitle = "Search";
-				include("banner.php");
+				// include("banner.php");
 				include("navigation.php");
 			?>
-
+			
 			<div id="container" class="box">
 			    <div id="obsah" class="content box">
 					<div class="in">
@@ -127,56 +136,57 @@
 					</div>
 					<div id="panel-right" class="box panel">
 						<div id="bottom">
-							<?php include("sidebar.php");?>
-						</div>
+							<?php //include("sidebar.php");?>
+						</div> 
 				
 					</div>
+					</div><!-- end of obsah -->
 				<?php 
 				$query = "SELECT * FROM ride WHERE ";
+				$post = false;
 				if($_POST['pickUpNH']){
 					$pickupnh = $_POST['pickUpNH'];
 					$query .= "snhood ='".$pickupnh."' AND ";
+					$post = true;
 				}
 				if($_POST['pickUpP']){
 					$pickupp = $_POST['pickUpP'];
 					$spostal1 = intval($pickupp) - 30;
 					$spostal2 = intval($pickupp) + 30;
 					$query .= "spostal BETWEEN '".$spostal1."' AND '".$spostal2."' AND ";
+					$post = true;
 				}
 				if($_POST['DestinationNH']){
 					$destnh = $_POST['DestinationNH'];
 					$query .= "dnhood = '".$destnh."' AND ";
+					$post = true;
 				}
 				if($_POST['DestinationP']){
 					$destp = $_POST['DestinationP'];
 					$dpostal1 = intval($destp) - 30;
 					$dpostal2 = intval($destp) + 30;
 					$query .= "dpostal BETWEEN '".$dpostal1."' AND '".$dpostal2."' AND ";
+					$post = true;
 				}
 
-				$query = substr($query, 0, -5);
-
-				// if($_POST['pickUpNH']||$_POST['pickUpP']||$_POST['DestinationNH']||$_POST['DestinationP']){
-
-				// // $pickup = $_POST['pickUp'];
-				// $pickupnh = $_POST['pickUpNH'];
-				// $pickupp = $_POST['pickUpP'];
-				// // $dest = $_POST['Destination'];
-				// $destnh = $_POST['DestinationNH'];
-				// $destp = $_POST['DestinationP']; 
-
-				// $spostal1 = intval($pickupp) - 10;
-				// $spostal2 = intval($pickupp) + 10;
-				// $dpostal1 = intval($destp) - 10;
-				// $dpostal2 = intval($destp) + 10;
-
-				// $query = "SELECT * FROM ride WHERE snhood = '".$pickupnh."' AND spostal BETWEEN '".$spostal1."' AND '".$spostal2."' AND dnhood = '".$destnh."' AND dpostal BETWEEN '".$dpostal1."' AND '".$dpostal2."'";
-				$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+				if($_POST["Search"]){
+					if($post == true){
+						$query = substr($query, 0, -5);
+						$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+						// echo "<b>SQL:   </b>".$query."<br><br>";
+					}
+					else{
+						$query = substr($query, 0, -7);
+						$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+						// echo "<b>SQL:   </b>".$query."<br><br>";
+					}
+				}
 				// if($pickup == ""){
-				echo "<b>SQL:   </b>".$query."<br><br>";
+				
 				// 	$query = "SELECT * FROM ride WHERE ";
 				// 	$result=pg_query($sql);
 				// }
+				echo "<form action='join.php' method='post'>";
 				echo "<table border=\"1\" cellpadding=\"0\" cellspacing=\"0\" class=\"db-table\" >
 				<col width=\"5%\">
 				<col width=\"7%\">
@@ -202,27 +212,32 @@
 				<th>Status</th>
 				</tr>";
 
-				$row = pg_fetch_row($result);
-			    echo "<tr>";
-			    echo "<td>" . $row[0] . "</td>";
-			    echo "<td>" . $row[1] . "</td>";
-			    echo "<td>" . $row[2] . "</td>";
-			    echo "<td>" . $row[3] . "</td>";
-			    echo "<td>" . $row[4] . "</td>";
-			    echo "<td>" . $row[5] . "</td>";
-			    echo "<td>" . $row[6] . "</td>";
-			    echo "<td>" . $row[7] . "</td>";
-			    echo "<td>" . $row[8] . "</td>";
-			    echo "<td>" . $row[9] . "</td>";
-			    echo "<td>";
-
-			      pg_free_result($result);
+				while($row = pg_fetch_row($result)){
+				// $row = pg_fetch_row($result);
+					$ride = $row[0].",".$row[1].",".$row[2];
+				    echo "<tr>";
+				    echo "<td>" . $row[0] . "</td>";
+				    echo "<td>" . $row[1] . "</td>";
+				    echo "<td>" . $row[2] . "</td>";
+				    echo "<td>" . $row[3] . "</td>";
+				    echo "<td>" . $row[4] . "</td>";
+				    echo "<td>" . $row[5] . "</td>";
+				    echo "<td>" . $row[7] . "</td>";
+				    echo "<td>" . $row[9] . "</td>";
+				    echo "<td>" . $row[10] . "</td>";
+				    echo "<td> <button name='joinride' value='".$ride."' >JOIN RIDE</button> </td>";
+				 	echo "</tr>";
+				    
+				}
+				echo "</table></form>";
+			    pg_free_result($result);
 			// }
 			?>
 					
-		    </div><!-- end of obsah -->
+		    
   </div>
 </div>
+
 <div id="footer">
   <div id="foot">
     <div id="page-bottom"> <a href="#header">Go up</a> </div>
@@ -230,6 +245,6 @@
     <p class="f-right"><a href="http://www.tvorimestranky.cz" id="webdesign">Webdesign</a>: <a href="http://www.tvorimestranky.cz">TvorimeStranky.cz</a> | Sponsored by: <a href="http://www.topas-tachlovice.cz/topas-tachlovice.aspx">Tachlovice</a></p>
   </div>
 </div>
-<div align=center>This template  downloaded form <a href='http://all-free-download.com/free-website-templates/'>free website templates</a></div></body>
+<!-- <div align=center>This template  downloaded form <a href='http://all-free-download.com/free-website-templates/'>free website templates</a></div></body> -->
 </html>
 
