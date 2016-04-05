@@ -124,13 +124,27 @@ function switchToProf() {
 			}
 			
 		}
+		if ($_SERVER["REQUEST_METHOD"] == "POST") {
+			for ($i = 1; $i<=$_SESSION['carCount']; $i++) {
+				$submitName = 'car-remove-submit-'.$i;
+				if (isset($_POST[$submitName])) {
+					$regnum = "regnum".$i;
+					$sql = "DELETE FROM ride WHERE car='".$_POST[$regnum]."'";
+					echo $sql;
+					$result=pg_query($_SESSION['database'],$sql);
+					$sql = "DELETE FROM car WHERE regnum='".$_POST[$regnum]."'";
+					$result=pg_query($_SESSION['database'],$sql);
+					
+				}
+			}
+		}
 /**************************************** Car Table part **************************************/
 		$sql = "SELECT * FROM car WHERE owner = '".$_SESSION['login_user']."';";
 		$result=pg_query($_SESSION['database'],$sql);
 		?>
 		<div align="center" id="editCar" style="display:none">
 			<form action="profile.php" method="POST">
-				<Table style="width:50%;border: 1px solid black">
+				<Table style="width:50%" cellspacing="0" border="1">
 					<tr>
 						<td>Registration Number</td>
 						<td>Number of seat</td>
@@ -138,7 +152,7 @@ function switchToProf() {
 						<td>Colour</td>
 						<td>Make</td>
 					</tr>
-				<?php
+				<?php 
 				$count = 0;
 				while ($row=pg_fetch_array($result)) {
 					$count = $count+1;
@@ -149,6 +163,7 @@ function switchToProf() {
 					echo '<td><input type="text" id="'.$rowid.'" name="model'.$count.'" value="'.$row["model"].'"></td>';
 					echo '<td><input type="text" id="'.$rowid.'" name="color'.$count.'" value="'.$row["color"].'"></td>';
 					echo '<td><input type="text" id="'.$rowid.'" name="make'.$count.'" value="'.$row["make"].'"></td>';
+					echo '<td><input type="submit" name="car-remove-submit-'.$count.'" value="Remove"></td>';
 					echo '</tr>';
 				}
 				$_SESSION['carCount'] = $count;
@@ -162,7 +177,7 @@ function switchToProf() {
 			</form>
 		</div>
 		<div id="carDisplay" align="center" style="display:block">
-			<Table style="width:50%;border: 1px solid black">
+			<Table style="width:50%;" cellspacing="0" border="1">
 				<tr>
 					<td>Registration Number</td>
 					<td>Number of seat</td>
