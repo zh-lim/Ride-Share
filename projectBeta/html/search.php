@@ -27,7 +27,7 @@
 						<form class="form-horizontal" action="#" method="post">
 							<fieldset>
 								<!-- Form Name -->
-								<legend>Search for your ride</legend>
+								<legend>Search for your ride!</legend>
 							
 								<!-- Text input--><!-- For start Address -->
 								<!-- <div class="form-group">
@@ -142,7 +142,7 @@
 					</div>
 					</div><!-- end of obsah -->
 				<?php 
-				$query = "SELECT * FROM ride WHERE ";
+				$query = "SELECT * FROM ride WHERE status = 'P' AND ";
 				$post = false;
 				if($_POST['pickUpNH']){
 					$pickupnh = $_POST['pickUpNH'];
@@ -176,13 +176,13 @@
 						// echo "<b>SQL:   </b>".$query."<br><br>";
 					}
 					else{
-						$query = substr($query, 0, -7);
+						$query = substr($query, 0, -5);
 						$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 						// echo "<b>SQL:   </b>".$query."<br><br>";
 					}
 				}
 				// if($pickup == ""){
-				
+
 				// 	$query = "SELECT * FROM ride WHERE ";
 				// 	$result=pg_query($sql);
 				// }
@@ -213,28 +213,28 @@
 				</tr>";
 
 				while($row = pg_fetch_row($result)){
+					// if($row[10]=='P'){
 				// $row = pg_fetch_row($result);
-					$ride = $row[0].",".$row[1].",".$row[2];
-				    echo "<tr>";
-				    echo "<td>" . $row[0] . "</td>";
-				    echo "<td>" . $row[1] . "</td>";
-				    echo "<td>" . $row[2] . "</td>";
-				    echo "<td>" . $row[3] . "</td>";
-				    echo "<td>" . $row[4] . "</td>";
-				    echo "<td>" . $row[5] . "</td>";
-				    echo "<td>" . $row[7] . "</td>";
-				    echo "<td>" . $row[9] . "</td>";
-				    echo "<td>" . $row[10] . "</td>";
-				    echo "<td> <button name='joinride' value='".$ride."' >JOIN RIDE</button> </td>";
-				 	echo "</tr>";
-				    
+						$ride = $row[0].",".$row[1].",".$row[2];
+					    echo "<tr>";
+					    echo "<td>" . $row[0] . "</td>";
+					    echo "<td>" . $row[1] . "</td>";
+					    echo "<td>" . $row[2] . "</td>";
+					    echo "<td>" . $row[3] . "</td>";
+					    echo "<td>" . $row[4] . "</td>";
+					    echo "<td>" . $row[5] . "</td>";
+					    echo "<td>" . $row[7] . "</td>";
+					    echo "<td>" . $row[9] . "</td>";
+					    echo "<td>" . $row[10] . "</td>";
+					    echo "<td> <button name='joinride' value='".$ride."' >JOIN RIDE</button> </td>";
+					 	echo "</tr>";
+				    // }
 				}
 				echo "</table></form>";
-			    pg_free_result($result);
+
 			// }
 			?>
-					
-		    
+
   </div>
 </div>
 
